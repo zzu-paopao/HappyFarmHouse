@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HappyFarmHouse</string>
+    <string name="give_score">打分</string>
 </resources>

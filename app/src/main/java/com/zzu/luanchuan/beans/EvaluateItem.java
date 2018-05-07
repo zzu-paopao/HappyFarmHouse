@@ -3,10 +3,38 @@ package com.zzu.luanchuan.beans;
 import java.util.ArrayList;
 
 @SuppressWarnings("all")
-public class Evaluate_item {
+public class EvaluateItem {
+    private String head_img_url;
+    private String nick_name;
+    private String time_stamp;
+
     private int evaluate_score;
     private String evaluate_content;
     private ArrayList<String> evaluate_img_urls;
+
+    public String getHead_img_url() {
+        return head_img_url;
+    }
+
+    public void setHead_img_url(String head_img_url) {
+        this.head_img_url = head_img_url;
+    }
+
+    public String getNick_name() {
+        return nick_name;
+    }
+
+    public void setNick_name(String nick_name) {
+        this.nick_name = nick_name;
+    }
+
+    public String getTime_stamp() {
+        return time_stamp;
+    }
+
+    public void setTime_stamp(String time_stamp) {
+        this.time_stamp = time_stamp;
+    }
 
     public int getEvaluate_score() {
         return evaluate_score;

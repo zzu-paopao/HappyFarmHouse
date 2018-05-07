@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/good_bg"
     android:theme="@style/toobar_theme">
 
     <android.support.v7.widget.Toolbar
@@ -13,16 +14,15 @@
         android:fitsSystemWindows="true"
         android:minHeight="?attr/actionBarSize"
         app:layout_collapseMode="pin"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        >
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
     </android.support.v7.widget.Toolbar>
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+
+        style="@style/common_wid_hei">
 
     </android.support.v7.widget.RecyclerView>
 
