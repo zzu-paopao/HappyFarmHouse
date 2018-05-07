@@ -23,6 +23,8 @@
             style="@style/common_wid_hei"
             android:background="@color/white"
             android:orientation="vertical">
+
+
             <!--评论的头部-->
             <LinearLayout
                 android:id="@+id/evaluate_head"
@@ -101,6 +103,7 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:background="@mipmap/good" />
+
                         <View
                             android:layout_width="25dp"
                             android:layout_height="25dp"
@@ -110,6 +113,7 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:background="@mipmap/bad" />
+
                         <View
                             android:layout_width="25dp"
                             android:layout_height="25dp"
@@ -119,6 +123,28 @@
             </LinearLayout>
             <!--评论的头部-->
 
+            <!--评论的内容-->
+            <TextView
+                android:id="@+id/evaluate_content"
+               style="@style/common_wid_hei"
+                android:layout_margin="5dp"
+                android:singleLine="false"
+                android:ellipsize="none"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                />
+            <!--评论的内容-->
+
+
+            <com.goyourfly.multi_picture.MultiPictureView
+                android:id="@+id/evaluate_imgs"
+                style="@style/common_wid_hei"
+                android:layout_marginTop="16dp"
+                app:imageLayoutMode="DYNAMIC"
+                app:max="9"
+                app:ratio="1"
+                app:space="6dp"
+                app:span="3" />
 
 
 

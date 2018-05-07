@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">HappyFarmHouse</string>
     <string name="give_score">打分</string>
+    <string name="evaluate_hint">请说出您的评价...</string>
 </resources>

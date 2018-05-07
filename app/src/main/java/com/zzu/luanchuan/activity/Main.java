@@ -39,6 +39,7 @@ public class Main extends Base{
     }
 
     private void initialize() {
+
         toobar = $(R.id.toolbar);
         toobar.setTitle("用户评价");
         recyclerView = $(R.id.recycler_view);
