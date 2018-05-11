@@ -58,11 +58,13 @@ public class PublishEvaluate extends Base {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(PublishEvaluate.this,Main.class);
                 intent.putExtra("text", edit_evaluate_content.getText().toString());
                 intent.putParcelableArrayListExtra("image", multiPictureView.getList());
 //                setResult(RESULT_OK,intent);
 //                onBackPressed();
+
+                startActivity(intent);
             }
         });
     }
@@ -79,6 +81,7 @@ public class PublishEvaluate extends Base {
                     .choose(MimeType.allOf())
                     .maxSelectable(9 - multiPictureView.getCount())
                     .thumbnailScale(0.85f)
+                    .theme(R.style.my_zhihu_theme)
                     .imageEngine(new ImageEngine() {
                         @Override
                         public void loadThumbnail(Context context, int i, Drawable drawable, ImageView imageView, Uri uri) {

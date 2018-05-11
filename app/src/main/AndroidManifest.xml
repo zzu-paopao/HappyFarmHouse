@@ -13,6 +13,10 @@
         <activity android:name=".activity.Main">
 
         </activity>
+        <activity android:name=".activity.BigImage"
+            android:theme="@style/big_image_theme">
+
+        </activity>
 
         <activity android:name=".activity.PublishEvaluate"
             android:theme="@style/AppTheme">

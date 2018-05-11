@@ -1,6 +1,8 @@
 package com.zzu.luanchuan.activity;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,24 +17,35 @@ import com.zzu.luanchuan.beans.EvaluateItem;
 import java.util.ArrayList;
 
 @SuppressWarnings("all")
-public class Main extends Base{
+public class Main extends Base {
     private Toolbar toobar;
     private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        Intent intent = getIntent();
+        ArrayList<Uri> uri_list = null;
+        String text = null;
+        if (intent != null) {
+          text =   intent.getStringExtra("text");
+            uri_list = intent.getParcelableArrayListExtra("image");
+
+        }
         initialize();
         EvaluateItem evi = null;
-        ArrayList<EvaluateItem> list = new ArrayList<>() ;
+        ArrayList<EvaluateItem> list = new ArrayList<>();
 
-        for(int i = 0;i<20;i++){
+        for (int i = 0; i < 20; i++) {
             evi = new EvaluateItem();
+            evi.setEvaluate_img_uris(uri_list);
+            evi.setEvaluate_content(text);
             list.add(evi);
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        EvaluateAdapter ava = new EvaluateAdapter(list);
+        EvaluateAdapter ava = new EvaluateAdapter(list,Main.this);
         recyclerView.setAdapter(ava);
 
 

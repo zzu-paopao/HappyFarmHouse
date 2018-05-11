@@ -11,7 +11,7 @@
 
 
     <style name="toobar_theme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="colorControlNormal">#000000</item>
+        <item name="colorControlNormal">#ffffff</item>
         <item name="colorPrimary">#03a695</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
@@ -24,9 +24,26 @@
         <item name="android:layout_width">match_parent</item>
     </style>
 
+    <style name="my_zhihu_theme" parent="@style/Matisse.Zhihu">
+        <item name="colorPrimary">#03a695</item>
+    </style>
 
 
 
+    <style name="big_image_theme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowContentOverlay">@null</item>
+
+
+
+
+
+
+
+
+    </style>
 
 
 </resources>

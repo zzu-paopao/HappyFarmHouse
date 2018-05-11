@@ -135,17 +135,18 @@
                 />
             <!--评论的内容-->
 
-
+            <!--评论的图片-->
             <com.goyourfly.multi_picture.MultiPictureView
                 android:id="@+id/evaluate_imgs"
+                android:layout_margin="7dp"
                 style="@style/common_wid_hei"
                 android:layout_marginTop="16dp"
-                app:imageLayoutMode="DYNAMIC"
+                app:imageLayoutMode="STATIC"
                 app:max="9"
                 app:ratio="1"
                 app:space="6dp"
                 app:span="3" />
-
+            <!--评论的图片-->
 
 
         </LinearLayout>

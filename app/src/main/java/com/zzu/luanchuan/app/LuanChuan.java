@@ -1,6 +1,7 @@
 package com.zzu.luanchuan.app;
 
 import android.app.Application;
+import android.content.Context;
 import android.net.Uri;
 import android.widget.ImageView;
 
@@ -14,6 +15,7 @@ public class LuanChuan extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         MultiPictureView.setImageLoader(new ImageLoader() {
             @Override
             public void loadImage(ImageView imageView, Uri uri) {
@@ -25,4 +27,6 @@ public class LuanChuan extends Application {
             }
         });
     }
+
+
 }

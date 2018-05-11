@@ -1,5 +1,7 @@
 package com.zzu.luanchuan.beans;
 
+import android.net.Uri;
+
 import java.util.ArrayList;
 
 @SuppressWarnings("all")
@@ -11,6 +13,7 @@ public class EvaluateItem {
     private int evaluate_score;
     private String evaluate_content;
     private ArrayList<String> evaluate_img_urls;
+    private ArrayList<Uri> evaluate_img_uris;
 
     public String getHead_img_url() {
         return head_img_url;
@@ -59,4 +62,13 @@ public class EvaluateItem {
     public void setEvaluate_img_urls(ArrayList<String> evaluate_img_urls) {
         this.evaluate_img_urls = evaluate_img_urls;
     }
+
+    public ArrayList<Uri> getEvaluate_img_uris() {
+        return evaluate_img_uris;
+    }
+
+    public void setEvaluate_img_uris(ArrayList<Uri> evaluate_img_uris) {
+        this.evaluate_img_uris = evaluate_img_uris;
+    }
+
 }
