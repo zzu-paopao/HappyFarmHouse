@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:gravity="top"
+    android:orientation="vertical"
+    android:padding="15dip"
+    android:paddingTop="0dp">
+
+    <Button
+        android:id="@+id/btn_photochoose_photobox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/round_border_btn_selector"
+        android:letterSpacing="1.2"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:text="@string/album"
+        android:textSize="16sp" />
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0.5dip"-->
+    <!--android:background="#DAD9DB" />-->
+
+    <Button
+        android:id="@+id/btn_photochoose_take"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/round_border_btn_selector"
+        android:letterSpacing="1.2"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:text="@string/tabe_photo"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_photochoose_cancle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dip"
+        android:background="@drawable/round_corner_btn_selector"
+        android:letterSpacing="1.2"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:text="@string/cancel"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>

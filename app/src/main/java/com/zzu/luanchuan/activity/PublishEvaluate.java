@@ -1,6 +1,7 @@
 package com.zzu.luanchuan.activity;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,8 +15,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.goyourfly.multi_picture.MultiPictureView;
 import com.goyourfly.vincent.Vincent;
@@ -42,6 +48,77 @@ public class PublishEvaluate extends Base {
         }
 
 
+
+
+
+
+
+
+
+        View view = getLayoutInflater().inflate(
+                R.layout.select_img, null);
+        final Dialog dialog = new Dialog(this,
+                R.style.transparentFrameWindowStyle);
+        //为view中控件添加点击相应
+        Button btnCancle = view.findViewById(R.id.btn_photochoose_cancle);
+        Button btn_photochoose_photobox = view.findViewById(R.id.btn_photochoose_photobox);
+        Button btn_photochoose_take = view.findViewById(R.id.btn_photochoose_take);
+        btnCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        btn_photochoose_photobox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addImage();
+                dialog.dismiss();
+            }
+        });
+        btn_photochoose_take.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addImage();
+                dialog.dismiss();
+            }
+        });
+
+        // 传入界面
+        dialog.setContentView(view, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        Window window = dialog.getWindow();
+        // 设置显示动画
+        window.setWindowAnimations(R.style.main_menu_animstyle);
+        WindowManager.LayoutParams wl = window.getAttributes();//得到分层窗口
+        wl.x = 0;
+        wl.y = getWindowManager().getDefaultDisplay().getHeight();
+        // 以下这两句是为了保证按钮可以水平满屏
+        wl.width = LinearLayout.LayoutParams.MATCH_PARENT;
+        wl.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+
+        // 设置显示位置
+        dialog.onWindowAttributesChanged(wl);
+        // 设置点击外围解散
+        dialog.setCanceledOnTouchOutside(true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         edit_evaluate_content = $(R.id.edit_evaluate_content);
         multiPictureView =  $(R.id.multiple_image);
         // 如果不想显示删除按钮，可以这样写
@@ -50,7 +127,8 @@ public class PublishEvaluate extends Base {
         multiPictureView.setAddClickCallback(new MultiPictureView.AddClickCallback() {
             @Override
             public void onAddClick(View view) {
-                addImage();
+                dialog.show();
+
             }
         });
 

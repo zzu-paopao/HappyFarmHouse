@@ -8,5 +8,8 @@
     <color name="good_bg">#EBEBEB</color>
 
     <color name="white">#ffffff</color>
+    <color name="beautiful_blue">#03a695</color>
+    <color name="beautiful_blue2">#038c7d</color>
+    <color name="window_bg">#00666666</color>
 
 </resources>
