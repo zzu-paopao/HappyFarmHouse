@@ -49,7 +49,7 @@ public class EvaluateAdapter extends RecyclerView.Adapter<EvaluateAdapter.ViewHo
         holder.mMultiPictureView.setItemClickCallback(new MultiPictureView.ItemClickCallback() {
             @Override
             public void onItemClicked(View view, int index, ArrayList<Uri> uris) {
-                MyToast.showToast(view.getContext(), uris.get(index).toString() + "=======" + index);
+//                MyToast.showToast(view.getContext(), uris.get(index).toString() + "=======" + index);
                 Intent intent = new Intent(mActivity, BigImage.class);
                 intent.putExtra("uris", uris);//非必须
                 intent.putExtra("position", index);

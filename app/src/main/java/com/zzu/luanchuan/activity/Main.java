@@ -1,70 +1,118 @@
 package com.zzu.luanchuan.activity;
 
-
-import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-import android.widget.Toast;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 
+import com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationItem;
+import com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationView;
+import com.luseen.luseenbottomnavigation.BottomNavigation.OnBottomNavigationItemClickListener;
 import com.zzu.luanchuan.R;
-import com.zzu.luanchuan.adapter.EvaluateAdapter;
-import com.zzu.luanchuan.beans.EvaluateItem;
+import com.zzu.luanchuan.adapter.MainPagerAdapter;
+import com.zzu.luanchuan.constant.Constants;
+import com.zzu.luanchuan.fragment.Test;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("all")
 public class Main extends Base {
-    private Toolbar toobar;
-    private RecyclerView recyclerView;
+
+
+    private BottomNavigationView bottomNavigationView;
+
+
+    private ViewPager main_pager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        Intent intent = getIntent();
-        ArrayList<Uri> uri_list = null;
-        String text = null;
-        if (intent != null) {
-          text =   intent.getStringExtra("text");
-            uri_list = intent.getParcelableArrayListExtra("image");
 
+
+        bottomNavigationView = findViewById(R.id.bottomNavigation);
+        main_pager = findViewById(R.id.main_pager);
+        int[] image = {R.drawable.index, R.drawable.bargen,
+                R.drawable.me};
+        int[] color = {ContextCompat.getColor(this, R.color.firstColor), ContextCompat.getColor(this, R.color.secondColor),
+                ContextCompat.getColor(this, R.color.thirdColor)};
+
+
+
+        if (bottomNavigationView != null) {
+            bottomNavigationView.isWithText(true);//点击之前有字   没有字
+            // bottomNavigationView.activateTabletMode();
+            bottomNavigationView.isColoredBackground(false);//是否启用背景色
+            bottomNavigationView.setTextActiveSize(getResources().getDimension(R.dimen.text_active));
+            bottomNavigationView.setTextInactiveSize(getResources().getDimension(R.dimen.text_inactive));
+            bottomNavigationView.setItemActiveColorWithoutColoredBackground(ContextCompat.getColor(this, R.color.secondColor));
+            bottomNavigationView.setFont(Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/Noh_normal.ttf"));
         }
-        initialize();
-        EvaluateItem evi = null;
-        ArrayList<EvaluateItem> list = new ArrayList<>();
+        init();
+        bottomNavigationView.setUpWithViewPager(main_pager,color,image);
 
-        for (int i = 0; i < 20; i++) {
-            evi = new EvaluateItem();
-            evi.setEvaluate_img_uris(uri_list);
-            evi.setEvaluate_content(text);
-            list.add(evi);
-        }
+//        BottomNavigationItem bottomNavigationItem = new BottomNavigationItem
+//                (Constants.NAMES_OF_BOTTOM_TABS[0], color[0], image[0]);
+//        BottomNavigationItem bottomNavigationItem1 = new BottomNavigationItem
+//                (Constants.NAMES_OF_BOTTOM_TABS[1], color[1], image[1]);
+//        BottomNavigationItem bottomNavigationItem2 = new BottomNavigationItem
+//                (Constants.NAMES_OF_BOTTOM_TABS[2], color[2], image[2]);
+//        BottomNavigationItem bottomNavigationItem3 = new BottomNavigationItem
+//                ("GitHub", color[3], image[3]);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        EvaluateAdapter ava = new EvaluateAdapter(list,Main.this);
-        recyclerView.setAdapter(ava);
+
+//        bottomNavigationView.addTab(bottomNavigationItem);
+//        bottomNavigationView.addTab(bottomNavigationItem1);
+//        bottomNavigationView.addTab(bottomNavigationItem2);
+
 
 
     }
 
-    private void initialize() {
+    void init() {
+        ArrayList<Fragment> list=new ArrayList<>();
 
-        toobar = $(R.id.toolbar);
-        toobar.setTitle("用户评价");
-        recyclerView = $(R.id.recycler_view);
-        setSupportActionBar(toobar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
+        Bundle bundle1=new Bundle();
+
+        bundle1.putInt("pager_num",1);
+        Fragment fg1= Test.newInstance(bundle1);
+
+        Bundle bundle2=new Bundle();
+
+        bundle2.putInt("pager_num",2);
+        Fragment fg2=Test.newInstance(bundle2);
+
+        Bundle bundle3=new Bundle();
+
+        bundle3.putInt("pager_num",3);
+        Fragment fg3=Test.newInstance(bundle3);
 
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            Toast.makeText(Main.this, "haah", Toast.LENGTH_SHORT).show();
-        }
-        return true;
+
+        list.add(fg1);
+        list.add(fg2);
+        list.add(fg3);
+
+
+        main_pager.setAdapter(new MainPagerAdapter(getSupportFragmentManager(),list,Constants.NAMES_OF_BOTTOM_TABS));
+        main_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                bottomNavigationView.selectTab(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
     }
 }

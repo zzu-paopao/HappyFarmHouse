@@ -9,6 +9,7 @@ import com.goyourfly.multi_picture.ImageLoader;
 import com.goyourfly.multi_picture.MultiPictureView;
 import com.goyourfly.vincent.Vincent;
 import com.zzu.luanchuan.R;
+import com.zzu.luanchuan.utils.StorageUtils;
 
 public class LuanChuan extends Application {
 
@@ -26,6 +27,8 @@ public class LuanChuan extends Application {
                         .into(imageView);
             }
         });
+
+        StorageUtils.initial_storage();
     }
 
 

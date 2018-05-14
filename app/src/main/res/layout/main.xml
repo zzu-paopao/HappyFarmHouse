@@ -1,30 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/good_bg"
-    android:theme="@style/toobar_theme">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_pager"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:fitsSystemWindows="true"
-        android:minHeight="?attr/actionBarSize"
-        app:layout_collapseMode="pin"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        android:layout_height="match_parent">
 
-    </android.support.v7.widget.Toolbar>
-
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-
-        style="@style/common_wid_hei">
-
-    </android.support.v7.widget.RecyclerView>
+    </android.support.v4.view.ViewPager>
+    <com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
 
 
-</android.support.design.widget.AppBarLayout>
+</RelativeLayout>

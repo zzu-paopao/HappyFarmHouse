@@ -12,4 +12,9 @@
     <color name="beautiful_blue2">#038c7d</color>
     <color name="window_bg">#00666666</color>
 
+
+    <color name="firstColor">#00BCD4</color>
+    <color name="secondColor">#E91E63</color>
+    <color name="thirdColor">#FF5722</color>
+    <color name="fourthColor">#4CAF50</color>
 </resources>
