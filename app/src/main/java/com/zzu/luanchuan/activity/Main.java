@@ -13,6 +13,7 @@ import com.luseen.luseenbottomnavigation.BottomNavigation.OnBottomNavigationItem
 import com.zzu.luanchuan.R;
 import com.zzu.luanchuan.adapter.MainPagerAdapter;
 import com.zzu.luanchuan.constant.Constants;
+import com.zzu.luanchuan.fragment.IndexPage;
 import com.zzu.luanchuan.fragment.Test;
 
 import java.util.ArrayList;
@@ -76,8 +77,8 @@ public class Main extends Base {
 
         Bundle bundle1=new Bundle();
 
-        bundle1.putInt("pager_num",1);
-        Fragment fg1= Test.newInstance(bundle1);
+
+        Fragment fg1= new IndexPage();
 
         Bundle bundle2=new Bundle();
 

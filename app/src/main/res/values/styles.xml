@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="toolbarNavigationButtonStyle">@style/myToolbarNavigationButtonStyle</item>
+
     </style>
 
 
@@ -53,4 +55,68 @@
         <!--<item name="android:windowBackground">@color/window_bg</item>-->
         <item name="android:windowBackground">@color/window_bg</item>
     </style>
+
+
+
+
+
+
+
+
+    <style name="myToolbarNavigationButtonStyle" parent="@style/Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="android:minWidth">40dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="AppTheme.Toolbar" parent="Widget.AppCompat.ActionBar">
+        <item name="contentInsetLeft">0dp</item>
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <style name="AppTheme.Label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/textsize_content</item>
+        <item name="android:textColor">@color/colorTextContent</item>
+    </style>
+
+    <style name="AppTheme.Label.Title">
+        <item name="android:textColor">@color/colorTextTitle</item>
+        <item name="android:textSize">@dimen/textsize_title</item>
+    </style>
+
 </resources>
+
+
+

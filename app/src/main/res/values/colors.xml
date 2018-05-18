@@ -9,6 +9,7 @@
 
     <color name="white">#ffffff</color>
     <color name="beautiful_blue">#03a695</color>
+    <color name="transparent_beautiful_blue">#6603a695</color>
     <color name="beautiful_blue2">#038c7d</color>
     <color name="window_bg">#00666666</color>
 
@@ -17,4 +18,33 @@
     <color name="secondColor">#E91E63</color>
     <color name="thirdColor">#FF5722</color>
     <color name="fourthColor">#4CAF50</color>
+
+
+
+
+
+    <color name="colorTextTitle">#333333</color>
+    <color name="colorTextContent">#444444</color>
+    <color name="colorTextAssistant">#888888</color>
+
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorBackgroundDark">#f2f2f2</color>
+    <color name="colorDivision">#33aaaaaa</color>
+    <color name="colorPrimaryOverlay">#cc0094ff</color>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <color name="colorDefault">#ffffff</color>
+
+    <color name="colorText">#9b9b9b</color>
 </resources>
