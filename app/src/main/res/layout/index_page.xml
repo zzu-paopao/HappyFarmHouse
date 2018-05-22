@@ -24,13 +24,13 @@
                 android:id="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="?attr/actionBarSize"/>
+                android:layout_marginTop="?android:attr/actionBarSize"/>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:paddingTop="?attr/actionBarSize"
+                android:paddingTop="?android:attr/actionBarSize"
                 android:background="@android:color/white"
                 android:overScrollMode="never"
                 tools:listitem="@layout/listitem_movie_item"/>
@@ -38,25 +38,35 @@
         <com.github.mmin18.widget.RealtimeBlurView
             android:id="@+id/blurView"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="?android:attr/actionBarSize"
             app:realtimeBlurRadius="10dp"
             app:realtimeOverlayColor="@color/transparent_beautiful_blue"/>
         <android.support.v7.widget.Toolbar
             style="@style/AppTheme.Toolbar"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="?android:attr/actionBarSize"
             android:background="@android:color/transparent"
             app:navigationIcon="@drawable/ic_loc"
             app:title="">
             <TextView
+                android:id="@+id/city_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:textSize="20sp"
 
-                android:text="栾川"/>
+                android:text="..."/>
 
+            <View
+                android:id="@+id/little_loading"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ic_little_loading"
+                android:layout_gravity="center_vertical"
+                >
+
+            </View>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -96,6 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+
 
         android:src="@drawable/ic_go_back"
         app:backgroundTint="@color/secondColor"

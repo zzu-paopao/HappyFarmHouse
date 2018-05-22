@@ -2,6 +2,8 @@ package com.zzu.luanchuan.constant;
 
 import android.os.Environment;
 
+import java.math.BigDecimal;
+
 /**
  * 这是所有的常量所在的类
  */
@@ -41,7 +43,8 @@ public class Constants {
     public static String[] NAMES_OF_BOTTOM_TABS = {"首页", "优惠", "我的"};
 
 
-
+public static double lat_scale = new BigDecimal("34.81182798734338").subtract(new BigDecimal("34.81175971980467")).doubleValue();
+public static double lon_scale = new BigDecimal("113.531184643507").subtract(new BigDecimal("113.53108540177345")).doubleValue();
 
 
     public static String JSON_MOVIES = "[" +

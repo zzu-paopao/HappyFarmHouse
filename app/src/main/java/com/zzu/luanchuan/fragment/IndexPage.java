@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,9 +13,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amap.api.location.AMapLocation;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -25,11 +27,15 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 import com.zzu.luanchuan.R;
+import com.zzu.luanchuan.activity.MapPicker;
+import com.zzu.luanchuan.activity.MarkerAnimationActivity;
 import com.zzu.luanchuan.activity.Search;
 import com.zzu.luanchuan.adapter.QuickAdapter;
 import com.zzu.luanchuan.beans.BannerItem;
 import com.zzu.luanchuan.beans.Movie;
 import com.zzu.luanchuan.constant.Constants;
+import com.zzu.luanchuan.utils.AMapLocUtils;
+import com.zzu.luanchuan.utils.MyToast;
 import com.zzu.luanchuan.utils.StatusBarUtil;
 
 import java.util.ArrayList;
@@ -44,12 +50,122 @@ public class IndexPage extends Base {
     private Toolbar toolbar;
     private RefreshLayout refreshLayout;
     private ImageView goto_search;
+    private double mLatitude;
+    private double mLongitude;
+    private String cityCode;
+    private String city_disp;
+    private TextView city_name;
+    private View little_loading;
+    private Animation loading;
+    private boolean is_ready = false;
+    private AMapLocUtils amaputil = new AMapLocUtils();
     public static List<BannerItem> BANNER_ITEMS = new ArrayList<BannerItem>() {{
         add(new BannerItem("最后的骑士", R.mipmap.image_movie_header_48621499931969370));
         add(new BannerItem("三生三世十里桃花", R.mipmap.image_movie_header_12981501221820220));
         add(new BannerItem("豆福传", R.mipmap.image_movie_header_12231501221682438));
     }};
+    Runnable updateUI = new Runnable() {
+        @Override
+        public void run() {
+            if(city_name!=null){
+                city_name.setText(city_disp);
+            }
 
+            little_loading.clearAnimation();
+            little_loading.setVisibility(View.GONE);
+        }
+    }; Runnable updateUI2 = new Runnable() {
+        @Override
+        public void run() {
+
+            little_loading.clearAnimation();
+            little_loading.setVisibility(View.GONE);
+        }
+    };
+    Runnable check_run = new Runnable() {
+        @Override
+        public void run() {
+            int count = 0;
+            while (true) {
+                if (mLatitude != 0.0 && mLongitude != 0.0 && cityCode != "" && city_disp != "") {
+                    getActivity().runOnUiThread(updateUI);
+                    break;
+                } else {
+                    count++;
+                    if(count>5){
+                        MyToast.showToastOnOtherThread(getActivity(),"网络可能不好，请稍候重试");
+                        getActivity().runOnUiThread(updateUI2);
+                        break;
+
+                    }
+                    amaputil.getLonLat(getActivity(), new AMapLocUtils.LonLatListener() {
+                        @Override
+                        public void getLonLat(AMapLocation aMapLocation) {
+
+                            mLongitude = aMapLocation.getLongitude();
+                            mLatitude = aMapLocation.getLatitude();
+                            cityCode = aMapLocation.getCityCode();
+                            city_disp = aMapLocation.getCity();
+
+                        }
+                    });
+                }
+
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+    };
+ Runnable map_pick_run = new Runnable() {
+        @Override
+        public void run() {
+            int count = 0;
+            while (true) {
+                if (mLatitude != 0.0 && mLongitude != 0.0 && cityCode != "" && city_disp != "") {
+                    getActivity().runOnUiThread(updateUI);
+
+                    Intent openSend = new Intent(getActivity(), MapPicker.class);
+                    openSend.putExtra("lon", mLongitude);
+                    openSend.putExtra("lat", mLatitude);
+                    openSend.putExtra("cityCode", cityCode);
+
+                    startActivity(openSend);
+
+                    break;
+                } else {
+                    count++;
+                    if(count>5){
+                        MyToast.showToastOnOtherThread(getActivity(),"网络可能不好，请稍候重试");
+                        getActivity().runOnUiThread(updateUI2);
+                        break;
+
+                    }
+                    amaputil.getLonLat(getActivity(), new AMapLocUtils.LonLatListener() {
+                        @Override
+                        public void getLonLat(AMapLocation aMapLocation) {
+
+                            mLongitude = aMapLocation.getLongitude();
+                            mLatitude = aMapLocation.getLatitude();
+                            cityCode = aMapLocation.getCityCode();
+                            city_disp = aMapLocation.getCity();
+
+                        }
+                    });
+                }
+
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+    };
 
     @Nullable
     @Override
@@ -60,7 +176,30 @@ public class IndexPage extends Base {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        amaputil.getLonLat(getActivity(), new AMapLocUtils.LonLatListener() {
+            @Override
+            public void getLonLat(AMapLocation aMapLocation) {
+
+                mLongitude = aMapLocation.getLongitude();
+                mLatitude = aMapLocation.getLatitude();
+                cityCode = aMapLocation.getCityCode();
+                city_disp = aMapLocation.getCity();
+
+            }
+        });
+        new Thread(check_run).start();
+    }
+
     private void initialize_view(View v) {
+        city_name = $(R.id.city_name, v);
+        little_loading = $(R.id.little_loading, v);
+        loading = AnimationUtils.loadAnimation(little_loading.getContext(), R.anim.little_loading);
+        little_loading.startAnimation(loading);
+
         final List<Movie> movies = new Gson().fromJson(Constants.JSON_MOVIES, new TypeToken<ArrayList<Movie>>() {
         }.getType());
         mAdapter = new QuickAdapter();
@@ -89,9 +228,11 @@ public class IndexPage extends Base {
                         fab.show();
                     }
                     //获取RecyclerView滑动时候的状态
-                } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {//拖动中
-
                 }
+
+//                else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {//拖动中
+//
+//                }
             }
         });
 
@@ -142,6 +283,14 @@ public class IndexPage extends Base {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(little_loading.getVisibility()==View.VISIBLE){
+                    MyToast.showToast(getActivity(),"正在获取您的位置，请稍等！！");
+                }else {
+                    little_loading.setVisibility(View.VISIBLE);
+                    little_loading.startAnimation(loading);
+                    MyToast.showToast(getActivity(),"正在刷新位置...");
+                    new Thread(map_pick_run).start();
+                }
 
             }
         });
@@ -164,7 +313,7 @@ public class IndexPage extends Base {
             }
         });
 
-        goto_search = $(R.id.goto_search,v);
+        goto_search = $(R.id.goto_search, v);
         goto_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

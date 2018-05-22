@@ -285,6 +285,7 @@ public class SearchViewWithHistory extends LinearLayout {
         FrameLayout.LayoutParams params1 = (FrameLayout.LayoutParams) blurView.getLayoutParams();
         params1.height = searchBlockHeight;
 
+
         blurView.setLayoutParams(params1);
         StatusBarUtil.immersive(MyActivityManagerUtils.getInstance().getCurrentActivity());
         StatusBarUtil.setPaddingSmart(context, blurView);
