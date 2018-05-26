@@ -51,6 +51,8 @@ public class IndexPage extends Base {
     private Toolbar toolbar;
     private RefreshLayout refreshLayout;
     private ImageView goto_search;
+    private double select_Latitude;
+    private double select_Lonitude;
     private double mLatitude;
     private double mLongitude;
     private String cityCode;
@@ -58,6 +60,7 @@ public class IndexPage extends Base {
     private TextView city_name;
     private View little_loading;
     private Animation loading;
+private boolean firstcoming = true;
     private boolean is_ready = false;
     private AMapLocUtils amaputil = new AMapLocUtils();
     public static List<BannerItem> BANNER_ITEMS = new ArrayList<BannerItem>() {{
@@ -68,14 +71,18 @@ public class IndexPage extends Base {
     Runnable updateUI = new Runnable() {
         @Override
         public void run() {
-            if(city_name!=null){
-                city_name.setText(city_disp);
+            if (city_name != null) {
+                if("...".equals(city_name.getText().toString())){
+                    city_name.setText(city_disp);
+                }
+
             }
 
             little_loading.clearAnimation();
             little_loading.setVisibility(View.GONE);
         }
-    }; Runnable updateUI2 = new Runnable() {
+    };
+    Runnable updateUI2 = new Runnable() {
         @Override
         public void run() {
 
@@ -93,8 +100,8 @@ public class IndexPage extends Base {
                     break;
                 } else {
                     count++;
-                    if(count>5){
-                        MyToast.showToastOnOtherThread(getActivity(),"网络可能不好，请稍候重试");
+                    if (count > 5) {
+                        MyToast.showToastOnOtherThread(getActivity(), "网络可能不好，请稍候重试");
                         getActivity().runOnUiThread(updateUI2);
                         break;
 
@@ -121,7 +128,7 @@ public class IndexPage extends Base {
 
         }
     };
- Runnable map_pick_run = new Runnable() {
+    Runnable map_pick_run = new Runnable() {
         @Override
         public void run() {
             int count = 0;
@@ -134,13 +141,13 @@ public class IndexPage extends Base {
                     openSend.putExtra("lat", mLatitude);
                     openSend.putExtra("cityCode", cityCode);
 
-                    startActivityForResult(openSend,Constants.OPEN_PICK_ADDRESS);
+                    startActivityForResult(openSend, Constants.OPEN_PICK_ADDRESS);
 
                     break;
                 } else {
                     count++;
-                    if(count>5){
-                        MyToast.showToastOnOtherThread(getActivity(),"网络可能不好，请稍候重试");
+                    if (count > 5) {
+                        MyToast.showToastOnOtherThread(getActivity(), "网络可能不好，请稍候重试");
                         getActivity().runOnUiThread(updateUI2);
                         break;
 
@@ -180,19 +187,22 @@ public class IndexPage extends Base {
     @Override
     public void onStart() {
         super.onStart();
+if(firstcoming){
+    amaputil.getLonLat(getActivity(), new AMapLocUtils.LonLatListener() {
+        @Override
+        public void getLonLat(AMapLocation aMapLocation) {
 
-        amaputil.getLonLat(getActivity(), new AMapLocUtils.LonLatListener() {
-            @Override
-            public void getLonLat(AMapLocation aMapLocation) {
+            mLongitude = aMapLocation.getLongitude();
+            mLatitude = aMapLocation.getLatitude();
+            cityCode = aMapLocation.getCityCode();
+            city_disp = aMapLocation.getCity();
 
-                mLongitude = aMapLocation.getLongitude();
-                mLatitude = aMapLocation.getLatitude();
-                cityCode = aMapLocation.getCityCode();
-                city_disp = aMapLocation.getCity();
+        }
+    });
+    new Thread(check_run).start();
+    firstcoming = false;
+}
 
-            }
-        });
-        new Thread(check_run).start();
     }
 
     private void initialize_view(View v) {
@@ -284,12 +294,16 @@ public class IndexPage extends Base {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(little_loading.getVisibility()==View.VISIBLE){
-                    MyToast.showToast(getActivity(),"正在获取您的位置，请稍等！！");
-                }else {
+                if (little_loading.getVisibility() == View.VISIBLE) {
+                    MyToast.showToast(getActivity(), "正在获取您的位置，请稍等！！");
+                } else {
                     little_loading.setVisibility(View.VISIBLE);
                     little_loading.startAnimation(loading);
-                    MyToast.showToast(getActivity(),"正在刷新位置...");
+                    MyToast.showToast(getActivity(), "正在刷新位置...");
+                    mLongitude = 0.0;
+                    mLatitude = 0.0;
+                    cityCode = "";
+                    city_disp = "";
                     new Thread(map_pick_run).start();
                 }
 
@@ -326,8 +340,13 @@ public class IndexPage extends Base {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==Constants.OPEN_PICK_ADDRESS&&resultCode== Activity.RESULT_OK){
+        if (requestCode == Constants.OPEN_PICK_ADDRESS && resultCode == Activity.RESULT_OK) {
+            select_Latitude = data.getDoubleExtra("lat", 0);
+            select_Lonitude = data.getDoubleExtra("lon", 0);
+          city_name.setText(data.getStringExtra("title"));
 
+
+//           MyToast.showToast(getActivity(),data.getStringExtra("title")+"cfdjhirojfikfgldgklgfgkfgj"+select_Lonitude+"gfgfg"+select_Latitude);
         }
     }
 }

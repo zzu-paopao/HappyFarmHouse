@@ -388,15 +388,21 @@ public class MapPicker extends Base implements AMap.OnMapClickListener, AMap.OnC
             @Override
             public void onClick(View v) {
                 int index = 0;
-             List<AddressItem> list=   mMapItemAdapter.getData();
-             for(int i = 0;i<list.size();i++){
-                 if(list.get(i).isIs_selected()){
-                     index = i;
-                     break;
-                 }
-             }
+                List<AddressItem> list = mMapItemAdapter.getData();
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).isIs_selected()) {
+                        index = i;
+                        break;
+                    }
+                }
 
-
+                AddressItem addressItem = list.get(index);
+                Intent i = new Intent();
+                i.putExtra("lat", addressItem.getPoint().getLatitude());
+                i.putExtra("lon", addressItem.getPoint().getLongitude());
+                i.putExtra("title", addressItem.getTitle());
+                setResult(RESULT_OK, i);
+                finish();
             }
         });
 
@@ -461,18 +467,15 @@ public class MapPicker extends Base implements AMap.OnMapClickListener, AMap.OnC
                     getAddress(cameraPosition.target);
                     doSearchQuery();
 
-                } else  {
+                } else {
 
                     if (isBackFromSearchChoose) {
 
                         isHandDrag = false;
                         doSearchQuery();
-                    }else {
+                    } else {
                         isHandDrag = true;
                     }
-
-
-
 
 
                 }
