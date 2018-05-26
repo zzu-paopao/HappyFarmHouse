@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.github.mmin18.widget.RealtimeBlurView;
 import com.zzu.luanchuan.R;
+import com.zzu.luanchuan.utils.KeyBoardUtils;
 import com.zzu.luanchuan.utils.MyActivityManagerUtils;
 import com.zzu.luanchuan.utils.MyToast;
 import com.zzu.luanchuan.utils.StatusBarUtil;
@@ -212,7 +213,7 @@ public class SearchViewWithHistory extends LinearLayout {
             @Override
             public void onClick(View v) {
                 MyToast.showToast(context,"开始搜索。。。。");
-
+                KeyBoardUtils.closeKeybord(et_search,context);
                 // 2. 点击搜索键后，对该搜索字段在数据库是否存在进行检查（查询）->> 关注1
                 boolean hasData = hasData(et_search.getText().toString().trim());
                 // 3. 若存在，则不保存；若不存在，则将该搜索字段保存（插入）到数据库，并作为历史搜索记录

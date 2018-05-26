@@ -1,5 +1,6 @@
 package com.zzu.luanchuan.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,7 +29,7 @@ import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 import com.zzu.luanchuan.R;
 import com.zzu.luanchuan.activity.MapPicker;
-import com.zzu.luanchuan.activity.MarkerAnimationActivity;
+
 import com.zzu.luanchuan.activity.Search;
 import com.zzu.luanchuan.adapter.QuickAdapter;
 import com.zzu.luanchuan.beans.BannerItem;
@@ -133,7 +134,7 @@ public class IndexPage extends Base {
                     openSend.putExtra("lat", mLatitude);
                     openSend.putExtra("cityCode", cityCode);
 
-                    startActivity(openSend);
+                    startActivityForResult(openSend,Constants.OPEN_PICK_ADDRESS);
 
                     break;
                 } else {
@@ -322,5 +323,11 @@ public class IndexPage extends Base {
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==Constants.OPEN_PICK_ADDRESS&&resultCode== Activity.RESULT_OK){
 
+        }
+    }
 }

@@ -38,7 +38,7 @@ public ClearableEditText(Context context, AttributeSet attrs, int defStyleAttr) 
 private void init() {
         clearDrawable = getResources().getDrawable(R.drawable.delete);
         clearDrawable.setBounds(0,0,50,50);
-        setCompoundDrawables(null,null,clearDrawable,null);
+       // setCompoundDrawables(null,null,clearDrawable,null);
 //        searchDrawable = getResources().getDrawable(R.mipmap.search);
 
 //        setCompoundDrawablesWithIntrinsicBounds(searchDrawable, null,

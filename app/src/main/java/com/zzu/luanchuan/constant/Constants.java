@@ -45,7 +45,8 @@ public class Constants {
 
 public static double lat_scale = new BigDecimal("34.81182798734338").subtract(new BigDecimal("34.81175971980467")).doubleValue();
 public static double lon_scale = new BigDecimal("113.531184643507").subtract(new BigDecimal("113.53108540177345")).doubleValue();
-
+    public static final int OPEN_SEARCH_ADDRESS = 0X0001;
+    public static final int OPEN_PICK_ADDRESS = 0X0003;
 
     public static String JSON_MOVIES = "[" +
             "{\"actors\":\"丹尼斯·威缇可宁|Emma|Nikki|Jiayao|Wang|Maggie|Mao|Gang-yun|Sa\",\"filmName\":\"神灵寨\",\"grade\":\"5.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg\",\"releasedate\":\"2017-07-31\",\"shortinfo\":\"父亲忽病危 新娘真够黑\",\"type\":\"剧情|喜剧\"}," +
