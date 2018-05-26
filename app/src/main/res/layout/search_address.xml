@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
 
         android:background="@android:color/white"
-        app:srlAccentColor="@android:color/white"
+        app:srlAccentColor="#ffffff"
         app:srlEnableNestedScrolling="true"
         app:srlEnablePreviewInEditMode="false"
         app:srlPrimaryColor="@color/colorPrimary">
